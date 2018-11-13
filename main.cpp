@@ -3,7 +3,8 @@
 #include <fstream>
 struct Node {
      int data;
-     Node* left, right;
+     Node* left;
+     Node* right;
      Node(int data) {
           this->data = data;
           this->left = nullptr;
@@ -12,7 +13,8 @@ struct Node {
 };
 
 class BSTree {
-     private Node *root == nullptr;
+     private:
+     Node *root = nullptr;
      public:
           BSTree(){
                Node* root = nullptr;
@@ -27,12 +29,16 @@ class BSTree {
           }
           ~BSTree();
           void printTree() {
-               int height = height(root);
-               for(int i = 1; i<= height; i++) {
-                    printLeveL(i);
+               int h = height(root);
+               for(int i = 1; i<= h; i++) {
+                    printLeveL(i, root);
                }
           }
           void insertValue(int value) {
+               if(root == nullptr) {
+                    root = new Node(value);
+                    return;
+               }
                Node* temp = new Node(0);
                temp = root;
                while(temp != nullptr) {
@@ -64,6 +70,7 @@ class BSTree {
 };
 int main()
 {
+     BSTree bst = BSTree("bst.txt");
     cout << "Hello world!" << endl;
     return 0;
 }
