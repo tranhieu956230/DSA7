@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
 struct Node {
      int data;
      Node* left, right;
@@ -11,13 +12,18 @@ struct Node {
 };
 
 class BSTree {
-     private Node *root;
+     private Node *root == nullptr;
      public:
           BSTree(){
                Node* root = nullptr;
           }
           BSTree(char *filename) {
-
+               std::fstream file;
+               file.open(filename, std::fstream::in);
+               int i;
+               while(file >> i) {
+                    insertValue(i);
+               }
           }
           ~BSTree();
           void printTree() {
@@ -51,7 +57,9 @@ class BSTree {
                while(temp-> data != value) {
                     if(temp -> data < value) temp = temp->right;
                     else if(temp -> data > value) temp = temp->left;
+                    if(temp == nullptr) break;
                }
+               return temp;
           }
 };
 int main()
